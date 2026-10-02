@@ -4,6 +4,7 @@ import { MovieCard } from "@/components/movie-card";
 import { ArchivePagination } from "@/components/archive-pagination";
 import { EmptyArchive } from "@/components/empty-archive";
 import { listGenres, listPublishedMovies } from "@/lib/movies";
+import { importInitialArchive } from "@/lib/import-archive";
 
 export const dynamic = "force-dynamic";
 
@@ -16,6 +17,7 @@ export default async function Home({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  await importInitialArchive();
   const raw = await searchParams;
   const query = single(raw.q).slice(0, 80);
   const genre = single(raw.genre).slice(0, 40);

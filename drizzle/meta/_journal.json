@@ -15,6 +15,13 @@
       "when": 1789353723858,
       "tag": "0001_lively_magdalene",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790912132640,
+      "tag": "0002_curvy_skrulls",
+      "breakpoints": true
     }
   ]
 }

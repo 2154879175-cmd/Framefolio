@@ -1,5 +1,9 @@
 import { index, integer, primaryKey, real, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
+export const archiveImports = sqliteTable("archive_imports", {
+  id: text("id").primaryKey(),
+});
+
 export const movies = sqliteTable(
   "movies",
   {

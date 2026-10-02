@@ -8,12 +8,14 @@ import { buttonVariants } from "@/components/ui/button";
 import { requireOwner } from "@/lib/admin-auth";
 import { listAdminMovies } from "@/lib/movies";
 import { chatGPTSignOutPath } from "@/app/auth";
+import { importInitialArchive } from "@/lib/import-archive";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "管理后台" };
 
 export default async function AdminPage() {
   const user = await requireOwner("/admin");
+  await importInitialArchive();
   const movies = await listAdminMovies();
 
   return (
