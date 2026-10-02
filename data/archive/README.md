@@ -17,3 +17,8 @@ git push
 ```
 
 所有后续本地数据快照继续写入这个目录。导出不包含 TMDB 密钥、登录凭据或运行日志。云端数据库需要另行导出，不能使用本地快照覆盖其新内容。
+# Film imagery / 电影画面
+
+`stills.json` records the TMDB source URLs and local paths of the three selected film images for each currently published film. Images are stored in `public/film-stills/`, so page viewing does not request TMDB's API. Existing movie and review records are unchanged. Newly added films without an image snapshot simply omit the filmstrip.
+
+`public/decorations/cinema-projector.png` is an original generated illustration. The orbital ornament is drawn in `components/film-decorations.tsx`.

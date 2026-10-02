@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { MoviePoster } from "@/components/movie-poster";
 import { getPublishedMovie } from "@/lib/movies";
+import { FilmStrip, OrbitDecoration, CinemaSketch } from "@/components/film-decorations";
 import { genreLabels } from "@/lib/genre-labels";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +25,7 @@ export default async function MovieDetail({ params }: { params: Promise<{ slug: 
         <a href="/" className="journal-back inline-flex items-center gap-2 text-sm"><ArrowLeft aria-hidden="true" className="size-4" />返回电影墙 / Back to archive</a>
         <article>
           <header className="journal-cover mt-7 grid gap-8 p-6 sm:p-9 lg:grid-cols-[260px_1fr] lg:gap-12 lg:p-12">
+            {movie.genres.some(genre => genre.name === "科幻") && <div className="journal-orbit"><OrbitDecoration /></div>}
             <div className="mx-auto w-full max-w-[260px]">
               <div className="journal-poster"><MoviePoster path={movie.posterPath} title={movie.title} priority className="w-full" /></div>
               <p className="mt-4 text-center text-[10px] uppercase tracking-[0.22em] text-zinc-500">Framefolio / Film notes</p>
@@ -47,11 +49,12 @@ export default async function MovieDetail({ params }: { params: Promise<{ slug: 
           </header>
           <div className="journal-reading mx-auto mt-12 max-w-[760px] sm:mt-16">
             {movie.shortReview && <section className="journal-short"><h2 className="journal-eyebrow">01 / 短评 / Short review</h2><blockquote className="mt-5 text-2xl leading-[1.8] sm:text-3xl">{movie.shortReview}</blockquote></section>}
+            <FilmStrip tmdbId={movie.tmdbId} title={movie.title} />
             {movie.overview && <section className="journal-section"><h2 className="journal-eyebrow">02 / 电影简介 / Synopsis</h2><p className="mt-5 text-lg leading-[1.9]">{movie.overview}</p></section>}
             {movie.longReview && <section className="journal-section"><h2 className="journal-eyebrow">03 / 长评 / Full review</h2>
               {movie.containsSpoilers ? <details className="journal-spoilers mt-5"><summary><span>含有剧透 · 点击展开或收起</span><span className="block text-xs tracking-wide">Contains spoilers · Click to expand or collapse</span></summary><div className="journal-review mt-7"><ReviewText text={movie.longReview} /></div></details> : <div className="journal-review mt-5"><ReviewText text={movie.longReview} /></div>}
             </section>}
-            <footer className="journal-end mt-14 pt-7"><span aria-hidden="true">✦</span><p className="mt-3 text-xs tracking-wide">散场之后，故事仍在。 / The story stays after the credits.</p><a href="/" className="journal-back mt-5 inline-block text-sm">返回电影墙 / Back to archive</a></footer>
+            <footer className="journal-end mt-14 pt-7"><CinemaSketch /><span aria-hidden="true">✦</span><p className="mt-3 text-xs tracking-wide">散场之后，故事仍在。 / The story stays after the credits.</p><a href="/" className="journal-back mt-5 inline-block text-sm">返回电影墙 / Back to archive</a></footer>
           </div>
         </article>
       </main>

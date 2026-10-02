@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ArrowUpRight } from "lucide-react";
+import { CinemaSketch } from "@/components/film-decorations";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = { title: "关于" };
@@ -19,12 +20,13 @@ export default function AboutPage() {
           <p>网站中的评分只代表个人感受。时间过去以后，感受也可能变化，但这些文字会尽量保留观看当时的样子。</p><p className="text-sm">Ratings reflect personal impressions. These notes preserve how each film felt at the time.</p>
         </div>
 
+        <div className="about-cinema-sketch"><CinemaSketch /><p>一束光，一场电影。<br /><span>A little light. A world of stories.</span></p></div>
         <section className="mt-16 border-t border-white/15 pt-8">
           <h2 className="text-sm font-medium">电影资料来源 / Film credits</h2>
           <div className="mt-5 flex items-start gap-5">
             <img src={TMDB_LOGO} alt="TMDB" className="h-12 w-12 shrink-0" />
             <div className="text-sm leading-7 text-zinc-500">
-              <p>电影基本信息和海报来自 TMDB。 / Film information and posters are provided by TMDB.</p>
+              <p>电影基本信息、海报及电影画面来自 TMDB。 / Film information, posters, and film images are provided by TMDB.</p>
               <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
               <a href="https://www.themoviedb.org" target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-zinc-300 hover:text-white">
                 访问 / Visit The Movie Database<ArrowUpRight aria-hidden="true" className="size-3.5" />

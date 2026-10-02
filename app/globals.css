@@ -169,3 +169,36 @@ a, button, input, select, textarea { outline-offset: 3px; }
 .editor-ui input, .editor-ui textarea { background: #fffcf8; }
 .editor-ui .text-red-300 { color: #a9364b; }
 @media (max-width: 639px) { .journal-review { font-size: 18px; } .journal-short { padding: 24px; } }
+
+/* Filmstrip photography leads; projector and orbital sketches stay in the margins. */
+.film-strip-figure { margin-top: 38px; }
+.film-strip { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; padding: 23px 10px; background: #58455e; border-radius: 3px; box-shadow: 0 8px 20px #47364b16; }
+.film-strip::before, .film-strip::after { content: ""; position: absolute; left: 8px; right: 8px; height: 7px; background: repeating-linear-gradient(90deg, #f5f2ed 0 10px, transparent 10px 20px); border-radius: 1px; }
+.film-strip::before { top: 7px; }
+.film-strip::after { bottom: 7px; }
+.film-strip-frame { position: relative; min-width: 0; overflow: hidden; background: #4b3b51; border-radius: 2px; }
+.film-strip-frame img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; filter: saturate(.72); display: block; }
+.film-strip-frame > span { position: absolute; left: 6px; bottom: 5px; color: white; font: 9px ui-monospace, monospace; text-shadow: 0 1px 4px #000; }
+.film-strip-figure figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; margin-top: 10px; color: #887591; font-size: 11px; letter-spacing: .06em; }
+.orbit-decoration { width: 100%; height: 100%; color: #93799f; }
+.journal-orbit { position: absolute; top: 22px; right: 18px; width: 160px; height: 180px; opacity: .22; pointer-events: none; }
+.journal-cover > :not(.journal-orbit) { position: relative; }
+.cinema-sketch { width: 126px; height: auto; object-fit: contain; opacity: .7; }
+.journal-end .cinema-sketch { margin: 0 auto 20px; width: 110px; opacity: .52; }
+.archive-collection-heading { position: relative; isolation: isolate; }
+.archive-orbit { position: absolute; width: 140px; height: 150px; right: 50px; top: -26px; opacity: .2; z-index: -1; pointer-events: none; }
+.archive-frame-interlude { max-width: 920px; margin: 46px auto 0; }
+.about-cinema-sketch { display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 45px; padding: 28px 16px; background: #eee6f140; border-radius: 8px 30px 8px 30px; }
+.about-cinema-sketch p { color: #796183; font-size: 19px; line-height: 1.8; }
+.about-cinema-sketch p span { font-size: 12px; }
+@media (max-width: 639px) {
+  .film-strip { gap: 4px; padding: 17px 6px; }
+  .film-strip::before, .film-strip::after { height: 5px; background-size: auto; }
+  .film-strip::before { top: 5px; }
+  .film-strip::after { bottom: 5px; }
+  .film-strip-figure figcaption { font-size: 10px; }
+  .journal-orbit { width: 115px; height: 130px; opacity: .16; }
+  .archive-orbit { right: 35px; width: 100px; height: 110px; }
+  .about-cinema-sketch { gap: 16px; }
+  .about-cinema-sketch .cinema-sketch { width: 95px; }
+}

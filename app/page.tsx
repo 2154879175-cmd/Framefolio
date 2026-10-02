@@ -1,3 +1,4 @@
+import { FilmStrip, OrbitDecoration } from "@/components/film-decorations";
 import { SiteHeader } from "@/components/site-header";
 import { FilterForm } from "@/components/filter-form";
 import { MovieCard } from "@/components/movie-card";
@@ -56,7 +57,8 @@ export default async function Home({
             This account does not have permission to manage Framefolio.
           </div>
         )}
-        <div className="flex items-end justify-between gap-6">
+        <div className="archive-collection-heading flex items-end justify-between gap-6">
+          <div className="archive-orbit"><OrbitDecoration /></div>
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">The collection</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">Film archive</h2>
@@ -75,6 +77,7 @@ export default async function Home({
                 <MovieCard key={movie.id} movie={movie} priority={index < 6} />
               ))}
             </div>
+            {!filtered && <div className="archive-frame-interlude"><FilmStrip /></div>}
             <ArchivePagination
               page={archive.page}
               totalPages={archive.totalPages}
