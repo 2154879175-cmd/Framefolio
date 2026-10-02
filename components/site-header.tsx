@@ -1,6 +1,6 @@
 export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   return (
-    <header className={`border-b border-white/15 ${overlay ? "absolute inset-x-0 top-0 z-10" : ""}`}>
+    <header className={`site-header border-b ${overlay ? "site-header-overlay absolute inset-x-0 top-0 z-10" : ""}`}>
       <div className="mx-auto flex min-h-20 max-w-[1500px] items-center justify-between px-5 sm:px-8 lg:px-12">
         <a href="/" className="group flex items-baseline gap-3 focus-visible:outline-2 focus-visible:outline-white">
           <span className="text-2xl font-semibold tracking-tight sm:text-3xl">framefolio<span className="text-violet-300">.</span></span>

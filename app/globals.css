@@ -3,34 +3,34 @@
 @import "../vendor/shadcn-tailwind-4.13.0.css";
 
 :root {
-  color-scheme: dark;
-  --background: #080808;
-  --foreground: #f4f4f2;
-  --card: #101010;
-  --card-foreground: #f4f4f2;
-  --popover: #151515;
-  --popover-foreground: #f4f4f2;
-  --primary: #f4f4f2;
-  --primary-foreground: #080808;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #f4f4f2;
-  --muted: #171717;
-  --muted-foreground: #969696;
-  --accent: #242424;
-  --accent-foreground: #ffffff;
-  --destructive: #f36f6f;
-  --border: #2b2b2b;
-  --input: #343434;
-  --ring: #d9d9d6;
-  --radius: 0.25rem;
-  --sidebar: #0d0d0d;
-  --sidebar-foreground: #f4f4f2;
-  --sidebar-primary: #f4f4f2;
-  --sidebar-primary-foreground: #080808;
-  --sidebar-accent: #1a1a1a;
-  --sidebar-accent-foreground: #f4f4f2;
-  --sidebar-border: #2b2b2b;
-  --sidebar-ring: #d9d9d6;
+  color-scheme: light;
+  --background: #f5f2ed;
+  --foreground: #302b36;
+  --card: #fffcf8;
+  --card-foreground: #302b36;
+  --popover: #fffcf8;
+  --popover-foreground: #302b36;
+  --primary: #5e466c;
+  --primary-foreground: #ffffff;
+  --secondary: #ebe5ef;
+  --secondary-foreground: #302b36;
+  --muted: #eee9e3;
+  --muted-foreground: #77707c;
+  --accent: #e5dce9;
+  --accent-foreground: #493453;
+  --destructive: #ad384b;
+  --border: #dcd3df;
+  --input: #d1c6d5;
+  --ring: #856491;
+  --radius: 0.65rem;
+  --sidebar: #f0ebe5;
+  --sidebar-foreground: #302b36;
+  --sidebar-primary: #302b36;
+  --sidebar-primary-foreground: #f5f2ed;
+  --sidebar-accent: #ebe5ef;
+  --sidebar-accent-foreground: #302b36;
+  --sidebar-border: #dcd3df;
+  --sidebar-ring: #856491;
 }
 
 @theme inline {
@@ -64,7 +64,7 @@
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 6px);
-  --font-sans: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+  --font-sans: Arial, "KaiTi", "STKaiti", "Kaiti SC", "楷体", "DFKai-SB", serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
@@ -77,7 +77,7 @@ body {
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
 }
-::selection { background: #f4f4f2; color: #080808; }
+::selection { background: #69517b; color: #ffffff; }
 a, button, input, select, textarea { outline-offset: 3px; }
 
 .film-grain { position: relative; }
@@ -124,3 +124,48 @@ a, button, input, select, textarea { outline-offset: 3px; }
   html { scroll-behavior: auto; }
   .archive-home .archive-poster img { transition: none; }
 }
+
+/* Paper, lavender ink, and editorial ornaments for the inner pages. */
+.site-header { border-color: #dcd3df; background: #f8f5f0; color: #35293e; }
+.site-header nav { color: #706377; }
+.site-header a:hover { color: #78568a; }
+.site-header-overlay { background: transparent; color: #ffffff; border-color: #ffffff25; }
+.site-header-overlay nav { color: #e9e1ee; }
+.site-header-overlay a:hover { color: #ffffff; }
+.movie-journal { background: radial-gradient(ellipse at 95% 12%, #eae1ef80, transparent 45%), #f5f2ed; }
+.journal-cover { position: relative; border-radius: 8px 54px 8px 8px; background: linear-gradient(130deg, #fcfaf6, #ede6f0); box-shadow: 0 14px 45px #50335f09; }
+.journal-cover::before { content: ""; position: absolute; top: 16px; left: 16px; width: 30px; height: 30px; border-top: 1px solid #ae95b8; border-left: 1px solid #ae95b8; border-radius: 3px 0 0; pointer-events: none; }
+.journal-cover::after { content: ""; position: absolute; bottom: 16px; right: 16px; width: 30px; height: 30px; border-bottom: 1px solid #ae95b8; border-right: 1px solid #ae95b8; border-radius: 0 0 3px; pointer-events: none; }
+.journal-poster { padding: 7px; background: #fffcf8; border-radius: 4px; box-shadow: 0 12px 24px #47364b20; }
+.journal-poster img { border-radius: 2px; }
+.journal-eyebrow { color: #796183; font-size: 13px; line-height: 1.8; letter-spacing: .08em; }
+.journal-original { font-family: Georgia, serif; color: #85778d; }
+.journal-tag { border: 1px solid #cbbbd1; border-radius: 999px; padding: 5px 12px; color: #6c5378; font-size: 12px; }
+.journal-tag:hover { background: #e3d6e9; }
+.journal-score { color: #644673; }
+.journal-facts { border-top: 1px solid #d8cbdc; }
+.journal-facts dt { color: #8b7e93; font-size: 12px; }
+.journal-facts dd { margin-top: 6px; line-height: 1.8; }
+.journal-short { position: relative; padding: 28px 28px 32px; background: #fdfbf7; border-radius: 24px 4px 24px 4px; box-shadow: 0 8px 30px #50335f06; }
+.journal-short::before { content: "“"; position: absolute; right: 22px; top: 8px; color: #d9c9e0; font: 76px Georgia, serif; }
+.journal-short blockquote { position: relative; color: #4b3956; }
+.journal-section { margin-top: 42px; padding-top: 26px; border-top: 1px solid #dcd3df; }
+.journal-section > p { color: #625c68; }
+.journal-spoilers summary { cursor: pointer; padding: 18px 24px; border-left: 3px solid #a387b0; border-radius: 3px 18px 18px 3px; background: #eee6f1; color: #634a70; line-height: 1.8; }
+.journal-spoilers summary::marker { color: #9276a0; }
+.journal-review { font-size: 19px; line-height: 1.95; overflow-wrap: anywhere; }
+.journal-review p { white-space: pre-line; }
+.journal-end { border-top: 1px solid #dcd3df; text-align: center; color: #8b7e93; }
+.journal-back { color: #796183; }
+.journal-back:hover { color: #473151; }
+.editor-ui, .about-page { color: #39323f; }
+:is(.editor-ui, .about-page) :is(.text-zinc-100, .text-zinc-200, .text-zinc-300, .text-zinc-400) { color: #5f5467; }
+:is(.editor-ui, .about-page) :is(.border-white\/15, .border-white\/20, .border-white\/30, .border-white\/10) { border-color: #d7cbdc; }
+.editor-ui .divide-white\/10 > :not(:last-child) { border-color: #d7cbdc; }
+.editor-ui :is(.bg-zinc-950, .bg-zinc-900) { background: #fbf8f4; }
+.editor-ui .border { border-radius: 12px; }
+.editor-ui section.border { border: 0; border-radius: 8px 32px 8px 8px; box-shadow: 0 8px 30px #50335f09; }
+.editor-ui .hover\:text-white:hover, .about-page .hover\:text-white:hover { color: #78568a; }
+.editor-ui input, .editor-ui textarea { background: #fffcf8; }
+.editor-ui .text-red-300 { color: #a9364b; }
+@media (max-width: 639px) { .journal-review { font-size: 18px; } .journal-short { padding: 24px; } }

@@ -20,7 +20,7 @@ export async function requireOwner(returnTo: string) {
 
 export async function getOwnerApiAccess() {
   const user = await getChatGPTUser();
-  if (!user) return { ok: false as const, status: 401, message: "请先登录。" };
-  if (!isAllowed(user.email)) return { ok: false as const, status: 403, message: "此账号没有管理权限。" };
+  if (!user) return { ok: false as const, status: 401, message: "请先登录。 / Please sign in." };
+  if (!isAllowed(user.email)) return { ok: false as const, status: 403, message: "此账号没有管理权限。 / This account cannot manage the archive." };
   return { ok: true as const, user };
 }

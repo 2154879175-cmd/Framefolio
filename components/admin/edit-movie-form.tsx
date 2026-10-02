@@ -36,11 +36,11 @@ export function EditMovieForm({ movie }: { movie: Movie }) {
         }),
       });
       const data = await response.json() as { error?: string };
-      if (!response.ok) throw new Error(data.error || "保存失败，请稍后重试。");
-      toast.success(status === "published" ? "影评已发布" : "草稿已保存");
+      if (!response.ok) throw new Error(data.error || "保存失败，请稍后重试。 / Could not save. Please retry.");
+      toast.success(status === "published" ? "影评已发布 / Review published" : "草稿已保存 / Draft saved");
       router.refresh();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "保存失败，请稍后重试。");
+      toast.error(error instanceof Error ? error.message : "保存失败，请稍后重试。 / Could not save. Please retry.");
     } finally {
       setSaving(null);
     }
@@ -50,40 +50,40 @@ export function EditMovieForm({ movie }: { movie: Movie }) {
     <div className="space-y-7">
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block">
-          <span className="text-sm text-zinc-300">我的评分</span>
-          <span className="ml-2 text-xs text-zinc-600">1.0–10.0 分</span>
-          <Input type="number" min={1} max={10} step={0.1} value={rating} onChange={(event) => setRating(event.target.value)} className="mt-2 h-11 border-white/20" placeholder="例如：8.5" />
+          <span className="text-sm text-zinc-300">我的评分 / My rating</span>
+          <span className="ml-2 text-xs text-zinc-600">1.0–10.0 分 / points</span>
+          <Input type="number" min={1} max={10} step={0.1} value={rating} onChange={(event) => setRating(event.target.value)} className="mt-2 h-11 border-white/20" placeholder="例如 / e.g. 8.5" />
         </label>
         <label className="block">
-          <span className="text-sm text-zinc-300">观影日期</span>
-          <span className="ml-2 text-xs text-zinc-600">可不填</span>
+          <span className="text-sm text-zinc-300">观影日期 / Watched on</span>
+          <span className="ml-2 text-xs text-zinc-600">可不填 / Optional</span>
           <Input type="date" value={watchedOn} onChange={(event) => setWatchedOn(event.target.value)} className="mt-2 h-11 border-white/20" />
         </label>
       </div>
 
       <label className="block">
-        <span className="text-sm text-zinc-300">短评</span>
-        <span className="ml-2 text-xs text-zinc-600">最多 500 字</span>
-        <Textarea value={shortReview} onChange={(event) => setShortReview(event.target.value)} maxLength={500} className="mt-2 min-h-28 border-white/20 leading-7" placeholder="用一两句话记下最直接的感受……" />
+        <span className="text-sm text-zinc-300">短评 / Short review</span>
+        <span className="ml-2 text-xs text-zinc-600">最多 500 字 / Up to 500 characters</span>
+        <Textarea value={shortReview} onChange={(event) => setShortReview(event.target.value)} maxLength={500} className="mt-2 min-h-28 border-white/20 leading-7" placeholder="用一两句话记下最直接的感受…… / Capture your first impressions…" />
       </label>
 
       <label className="block">
-        <span className="text-sm text-zinc-300">长评</span>
-        <span className="ml-2 text-xs text-zinc-600">用空行分段</span>
-        <Textarea value={longReview} onChange={(event) => setLongReview(event.target.value)} maxLength={20000} className="mt-2 min-h-72 border-white/20 leading-7" placeholder="把想保留的细节慢慢写下来……" />
+        <span className="text-sm text-zinc-300">长评 / Full review</span>
+        <span className="ml-2 text-xs text-zinc-600">用空行分段 / Separate paragraphs with a blank line</span>
+        <Textarea value={longReview} onChange={(event) => setLongReview(event.target.value)} maxLength={20000} className="mt-2 min-h-72 border-white/20 leading-7" placeholder="把想保留的细节慢慢写下来…… / Write the details you want to remember…" />
       </label>
 
       <label className="flex cursor-pointer items-start gap-3 border border-white/15 p-4">
         <Checkbox checked={containsSpoilers} onCheckedChange={(checked) => setContainsSpoilers(checked === true)} className="mt-0.5" />
-        <span><span className="block text-sm">长评包含剧透</span><span className="mt-1 block text-xs leading-5 text-zinc-500">发布后长评会默认折叠，访客需要主动展开。</span></span>
+        <span><span className="block text-sm">长评包含剧透 / Contains spoilers</span><span className="mt-1 block text-xs leading-5 text-zinc-500">发布后长评会默认折叠，访客需要主动展开。 / Readers must expand the review to see spoilers.</span></span>
       </label>
 
       <div className="flex flex-col gap-3 border-t border-white/15 pt-6 sm:flex-row sm:items-center">
         <Button type="button" variant="outline" className="border-white/20" onClick={() => save("draft")} disabled={saving !== null}>
-          {saving === "draft" ? <Loader2 aria-hidden="true" className="animate-spin" /> : <Save aria-hidden="true" />}保存为草稿
+          {saving === "draft" ? <Loader2 aria-hidden="true" className="animate-spin" /> : <Save aria-hidden="true" />}保存为草稿 / Save draft
         </Button>
         <Button type="button" onClick={() => save("published")} disabled={saving !== null}>
-          {saving === "published" ? <Loader2 aria-hidden="true" className="animate-spin" /> : <Eye aria-hidden="true" />}{movie.status === "published" ? "更新已发布内容" : "发布到电影墙"}
+          {saving === "published" ? <Loader2 aria-hidden="true" className="animate-spin" /> : <Eye aria-hidden="true" />}{movie.status === "published" ? "更新已发布内容 / Update" : "发布到电影墙 / Publish"}
         </Button>
         <div className="sm:ml-auto"><DeleteMovieButton id={movie.id} title={movie.title} /></div>
       </div>
