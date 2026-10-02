@@ -1,11 +1,10 @@
-import Link from "next/link";
 import type { Movie } from "@/lib/types";
 import { MoviePoster } from "@/components/movie-poster";
 
 export function MovieCard({ movie, priority = false }: { movie: Movie; priority?: boolean }) {
   return (
     <article className="group min-w-0">
-      <Link href={`/movie/${movie.slug}`} className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+      <a href={`/movie/${movie.slug}`} className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
         <div className="overflow-hidden bg-zinc-900">
           <MoviePoster
             path={movie.posterPath}
@@ -23,7 +22,7 @@ export function MovieCard({ movie, priority = false }: { movie: Movie; priority?
             {movie.rating?.toFixed(1) ?? "—"}<span className="ml-0.5 text-[10px] text-zinc-500">/10</span>
           </span>
         </div>
-      </Link>
+      </a>
     </article>
   );
 }

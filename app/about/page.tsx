@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import { ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 
@@ -33,7 +33,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <Link href="/" className="mt-16 inline-block text-sm text-zinc-400 underline underline-offset-4 hover:text-white">返回电影墙</Link>
+        <a href="/" className="mt-16 inline-block text-sm text-zinc-400 underline underline-offset-4 hover:text-white">返回电影墙</a>
       </main>
     </>
   );

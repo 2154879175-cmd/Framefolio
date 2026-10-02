@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import { ArrowUpRight, LogOut } from "lucide-react";
 import { MovieSearch } from "@/components/admin/movie-search";
 import { AdminWebMcpTools } from "@/components/admin/webmcp-tools";
@@ -23,12 +23,12 @@ export default async function AdminPage() {
       <AdminWebMcpTools />
       <header className="flex flex-wrap items-start justify-between gap-5 border-b border-white/15 pb-7">
         <div>
-          <Link href="/" className="text-xs uppercase tracking-[0.22em] text-zinc-500 hover:text-white">银幕手记</Link>
+          <a href="/" className="text-xs uppercase tracking-[0.22em] text-zinc-500 hover:text-white">银幕手记</a>
           <h1 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">管理电影档案</h1>
           <p className="mt-2 text-sm text-zinc-500">已登录为 {user.displayName}</p>
         </div>
         <div className="flex gap-3">
-          <Link href="/" className={buttonVariants({ variant: "outline" })}>查看网站<ArrowUpRight aria-hidden="true" /></Link>
+          <a href="/" className={buttonVariants({ variant: "outline" })}>查看网站<ArrowUpRight aria-hidden="true" /></a>
           <a href={chatGPTSignOutPath("/")} target="_top" className={buttonVariants({ variant: "ghost" })}><LogOut aria-hidden="true" />退出</a>
         </div>
       </header>
@@ -44,7 +44,7 @@ export default async function AdminPage() {
           <ul className="divide-y divide-white/10">
             {movies.map((movie) => (
               <li key={movie.id}>
-                <Link href={`/admin/movies/${movie.id}`} className="group grid grid-cols-[48px_1fr_auto] items-center gap-4 py-4 focus-visible:outline-2 focus-visible:outline-white sm:grid-cols-[56px_1fr_auto_auto]">
+                <a href={`/admin/movies/${movie.id}`} className="group grid grid-cols-[48px_1fr_auto] items-center gap-4 py-4 focus-visible:outline-2 focus-visible:outline-white sm:grid-cols-[56px_1fr_auto_auto]">
                   <MoviePoster path={movie.posterPath} title={movie.title} className="h-[72px] w-12 sm:h-[84px] sm:w-14" />
                   <div className="min-w-0">
                     <p className="truncate font-medium group-hover:underline group-hover:underline-offset-4">{movie.title}</p>
@@ -54,7 +54,7 @@ export default async function AdminPage() {
                     {movie.status === "published" ? "已发布" : "草稿"}
                   </span>
                   <span className="hidden w-10 text-right text-sm tabular-nums text-zinc-400 sm:block">{movie.rating?.toFixed(1) ?? "—"}</span>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>

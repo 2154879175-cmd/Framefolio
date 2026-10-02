@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { EditMovieForm } from "@/components/admin/edit-movie-form";
@@ -18,7 +18,7 @@ export default async function EditMoviePage({ params }: { params: Promise<{ id: 
 
   return (
     <main className="mx-auto max-w-5xl px-5 pb-24 pt-8 sm:px-8 lg:px-12">
-      <Link href="/admin" className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-white"><ArrowLeft aria-hidden="true" className="size-4" />返回管理后台</Link>
+      <a href="/admin" className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-white"><ArrowLeft aria-hidden="true" className="size-4" />返回管理后台</a>
       <div className="mt-8 grid gap-8 lg:grid-cols-[220px_1fr] lg:gap-12">
         <aside>
           <MoviePoster path={movie.posterPath} title={movie.title} priority className="w-full" />
@@ -27,7 +27,7 @@ export default async function EditMoviePage({ params }: { params: Promise<{ id: 
             <p className="mt-1 text-sm text-zinc-600">{movie.originalTitle}</p>
             <p className="mt-3 text-xs leading-5 text-zinc-500">{movie.releaseDate?.slice(0, 4) || "年份未知"} · {movie.director || "导演未知"}</p>
             {movie.status === "published" && (
-              <Link href={`/movie/${movie.slug}`} className="mt-5 inline-flex items-center gap-1 text-sm text-zinc-300 underline underline-offset-4 hover:text-white">查看公开页面<ExternalLink aria-hidden="true" className="size-3.5" /></Link>
+              <a href={`/movie/${movie.slug}`} className="mt-5 inline-flex items-center gap-1 text-sm text-zinc-300 underline underline-offset-4 hover:text-white">查看公开页面<ExternalLink aria-hidden="true" className="size-3.5" /></a>
             )}
           </div>
         </aside>

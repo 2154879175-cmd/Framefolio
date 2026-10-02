@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -7,7 +6,7 @@ export function EmptyArchive({ filtered }: { filtered: boolean }) {
     return (
       <div className="border-b border-white/15 py-24 text-center">
         <p className="text-lg">没有找到符合条件的电影</p>
-        <Link href="/" className="mt-4 inline-block text-sm text-zinc-400 underline underline-offset-4 hover:text-white">清除筛选</Link>
+        <a href="/" className="mt-4 inline-block text-sm text-zinc-400 underline underline-offset-4 hover:text-white">清除筛选</a>
       </div>
     );
   }
@@ -20,9 +19,9 @@ export function EmptyArchive({ filtered }: { filtered: boolean }) {
         <p className="text-xs uppercase tracking-[0.24em] text-zinc-400">Archive No. 000</p>
         <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-5xl">第一部电影，等你写下。</h2>
         <p className="mt-4 max-w-md text-base leading-7 text-zinc-300">从后台搜索一部看过的电影，补上评分与感受，它就会出现在这里。</p>
-        <Link href="/admin" className={`${buttonVariants()} mt-7 h-11 px-5`}>
+        <a href="/admin" className={`${buttonVariants()} mt-7 h-11 px-5`}>
           开始记录<ArrowUpRight aria-hidden="true" />
-        </Link>
+        </a>
       </div>
     </section>
   );

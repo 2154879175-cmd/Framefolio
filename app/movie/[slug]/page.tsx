@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
@@ -33,18 +33,18 @@ export default async function MovieDetail({ params }: { params: Promise<{ slug: 
     <>
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-5 pb-24 pt-8 sm:px-8 lg:px-12 lg:pt-12">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:text-white">
+        <a href="/" className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:text-white">
           <ArrowLeft aria-hidden="true" className="size-4" />返回电影墙
-        </Link>
+        </a>
 
         <article className="mt-8 grid gap-9 lg:grid-cols-[minmax(260px,360px)_1fr] lg:gap-14">
           <div>
             <MoviePoster path={movie.posterPath} title={movie.title} priority className="w-full" />
             <div className="mt-4 flex flex-wrap gap-2">
               {movie.genres.map((genre) => (
-                <Link key={genre.id} href={`/?genre=${encodeURIComponent(genre.name)}`} className="border border-white/20 px-2.5 py-1 text-xs text-zinc-400 hover:text-white">
+                <a key={genre.id} href={`/?genre=${encodeURIComponent(genre.name)}`} className="border border-white/20 px-2.5 py-1 text-xs text-zinc-400 hover:text-white">
                   {genre.name}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
