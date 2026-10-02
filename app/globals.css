@@ -91,3 +91,36 @@ a, button, input, select, textarea { outline-offset: 3px; }
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
 }
 .prose-review p + p { margin-top: 1.25rem; }
+
+/* A light catalog beneath a cinematic masthead. */
+.archive-home {
+  color-scheme: light;
+  background: #f5f4f1;
+  color: #202026;
+  --primary: #382745;
+  --primary-foreground: #ffffff;
+  --background: #f5f4f1;
+  --foreground: #202026;
+  --input: #d3ced6;
+  --ring: #69517b;
+}
+.archive-hero { background: #151021; }
+.archive-hero img { opacity: .62; object-position: center 58%; }
+.archive-hero-shade {
+  background: linear-gradient(90deg, rgba(21,16,40,.92), rgba(63,22,77,.38)), linear-gradient(0deg, rgba(15,12,23,.68), transparent);
+}
+.archive-home main form { border-color: #d8d3db; }
+.archive-home main [data-slot="native-select-wrapper"] { width: 100%; }
+.archive-home main form > div > [data-slot="native-select-wrapper"] { flex: 1; }
+.archive-home main input,
+.archive-home main select { border-color: #cec8d2; background: #faf9f7; color: #302735; }
+.archive-home main input::placeholder { color: #807a85; }
+.archive-home .archive-title { color: #26222b; }
+.archive-home .archive-rating { border-color: #d1c8d7; color: #493453; background: #eee8f1; }
+.archive-home .archive-poster { box-shadow: 0 8px 20px #21152812; }
+.archive-home main a:focus-visible { outline-color: #69517b; }
+.archive-home ::selection { background: #493453; color: white; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .archive-home .archive-poster img { transition: none; }
+}

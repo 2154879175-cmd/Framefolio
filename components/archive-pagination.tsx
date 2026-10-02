@@ -19,16 +19,16 @@ export function ArchivePagination({
   };
 
   return (
-    <nav aria-label="电影分页" className="mt-14 flex items-center justify-center gap-5 border-t border-white/15 pt-8">
+    <nav aria-label="Film pagination" className="mt-14 flex items-center justify-center gap-5 border-t border-white/15 pt-8">
       {page > 1 ? (
         <a href={href(page - 1)} className={cn(buttonVariants({ variant: "outline" }), "border-white/20")}>
-          <ChevronLeft aria-hidden="true" />上一页
+          <ChevronLeft aria-hidden="true" />Previous
         </a>
       ) : <span />}
       <span className="text-sm tabular-nums text-zinc-500">{page} / {totalPages}</span>
       {page < totalPages ? (
         <a href={href(page + 1)} className={cn(buttonVariants({ variant: "outline" }), "border-white/20")}>
-          下一页<ChevronRight aria-hidden="true" />
+          Next<ChevronRight aria-hidden="true" />
         </a>
       ) : <span />}
     </nav>

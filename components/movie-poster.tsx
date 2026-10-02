@@ -23,7 +23,7 @@ export function MoviePoster({
   return (
     <img
       src={src}
-      alt={`${title}海报`}
+      alt={`${title} poster`}
       className={`aspect-[2/3] object-cover ${className}`}
       loading={priority ? "eager" : "lazy"}
       fetchPriority={priority ? "high" : "auto"}
