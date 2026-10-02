@@ -11,6 +11,7 @@ export type Movie = {
   runtime: number | null;
   overview: string;
   posterPath: string | null;
+  stills: string[];
   director: string;
   cast: string[];
   genres: { id: number; name: string }[];

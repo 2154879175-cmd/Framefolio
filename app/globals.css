@@ -202,3 +202,7 @@ a, button, input, select, textarea { outline-offset: 3px; }
   .about-cinema-sketch { gap: 16px; }
   .about-cinema-sketch .cinema-sketch { width: 95px; }
 }
+
+.film-strip-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; aspect-ratio: 16/9; padding: 8px; color: #d8c8df; background: linear-gradient(145deg, #766080, #4b3b51); text-align: center; }
+.film-strip-placeholder > span { font-size: 20px; opacity: .6; }
+.film-strip-placeholder p { margin-top: 6px; font-size: 10px; line-height: 1.6; }

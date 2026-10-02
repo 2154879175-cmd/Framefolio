@@ -49,7 +49,7 @@ export default async function MovieDetail({ params }: { params: Promise<{ slug: 
           </header>
           <div className="journal-reading mx-auto mt-12 max-w-[760px] sm:mt-16">
             {movie.shortReview && <section className="journal-short"><h2 className="journal-eyebrow">01 / 短评 / Short review</h2><blockquote className="mt-5 text-2xl leading-[1.8] sm:text-3xl">{movie.shortReview}</blockquote></section>}
-            <FilmStrip tmdbId={movie.tmdbId} title={movie.title} />
+            <FilmStrip tmdbId={movie.tmdbId} title={movie.title} stills={movie.stills} />
             {movie.overview && <section className="journal-section"><h2 className="journal-eyebrow">02 / 电影简介 / Synopsis</h2><p className="mt-5 text-lg leading-[1.9]">{movie.overview}</p></section>}
             {movie.longReview && <section className="journal-section"><h2 className="journal-eyebrow">03 / 长评 / Full review</h2>
               {movie.containsSpoilers ? <details className="journal-spoilers mt-5"><summary><span>含有剧透 · 点击展开或收起</span><span className="block text-xs tracking-wide">Contains spoilers · Click to expand or collapse</span></summary><div className="journal-review mt-7"><ReviewText text={movie.longReview} /></div></details> : <div className="journal-review mt-5"><ReviewText text={movie.longReview} /></div>}

@@ -17,6 +17,7 @@ export const movies = sqliteTable(
     runtime: integer("runtime"),
     overview: text("overview").notNull().default(""),
     posterPath: text("poster_path"),
+    stillsJson: text("stills_json").notNull().default("[]"),
     director: text("director").notNull().default(""),
     castJson: text("cast_json").notNull().default("[]"),
     rating: real("rating"),

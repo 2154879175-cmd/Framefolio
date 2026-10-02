@@ -1,6 +1,8 @@
 import { env } from "cloudflare:workers";
 import type { TmdbSearchResult } from "@/lib/types";
 
+import { selectFilmImages, type TmdbBackdrop } from "@/lib/film-images";
+
 const TMDB_API = "https://api.themoviedb.org/3";
 
 type TmdbDetails = {
@@ -13,6 +15,7 @@ type TmdbDetails = {
   runtime?: number | null;
   production_countries?: { name: string }[];
   genres?: { id: number; name: string }[];
+  images?: { backdrops?: TmdbBackdrop[] };
   credits?: {
     crew?: { job: string; name: string }[];
     cast?: { name: string; order: number }[];
@@ -29,6 +32,7 @@ export type TmdbMovieSnapshot = {
   runtime: number | null;
   overview: string;
   posterPath: string | null;
+  stills: string[];
   director: string;
   cast: string[];
   genres: { id: number; name: string }[];
@@ -38,13 +42,13 @@ function readToken() {
   return env.TMDB_READ_TOKEN || process.env.TMDB_READ_TOKEN || "";
 }
 
-async function tmdbFetch<T>(path: string): Promise<T> {
+async function tmdbFetch<T>(path: string, attempts = 3): Promise<T> {
   const token = readToken();
   if (!token) {
     throw new Error("TMDB_NOT_CONFIGURED");
   }
 
-  for (let attempt = 0; attempt < 3; attempt += 1) {
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
     let response: Response;
     try {
       response = await fetch(`${TMDB_API}${path}`, {
@@ -52,9 +56,10 @@ async function tmdbFetch<T>(path: string): Promise<T> {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
         },
+        signal: AbortSignal.timeout(10000),
       });
     } catch {
-      if (attempt < 2) {
+      if (attempt + 1 < attempts) {
         await new Promise((resolve) => setTimeout(resolve, 250));
         continue;
       }
@@ -62,7 +67,7 @@ async function tmdbFetch<T>(path: string): Promise<T> {
     }
 
     if (response.ok) return response.json() as Promise<T>;
-    if (attempt < 2 && (response.status === 429 || response.status >= 500)) {
+    if (attempt + 1 < attempts && (response.status === 429 || response.status >= 500)) {
       await new Promise((resolve) => setTimeout(resolve, 250));
       continue;
     }
@@ -173,10 +178,16 @@ export async function getTmdbMovieSnapshot(tmdbId: number): Promise<TmdbMovieSna
     runtime: movie.runtime ?? null,
     overview: movie.overview || "",
     posterPath: movie.poster_path || null,
+    stills: selectFilmImages(movie.images?.backdrops),
     director,
     cast,
     genres: movie.genres ?? [],
   };
+}
+
+export async function getTmdbFilmImages(tmdbId: number): Promise<string[]> {
+  const images = await tmdbFetch<{ backdrops?: TmdbBackdrop[] }>(`/movie/${tmdbId}/images`, 1);
+  return selectFilmImages(images.backdrops);
 }
 
 function makeSlug(title: string, tmdbId: number) {

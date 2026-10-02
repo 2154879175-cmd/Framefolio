@@ -1,6 +1,6 @@
 import { env } from "cloudflare:workers";
 import type { Movie, MovieListFilters, MovieListResult, MovieUpdate } from "@/lib/types";
-import type { TmdbMovieSnapshot } from "@/lib/tmdb";
+import { getTmdbFilmImages, type TmdbMovieSnapshot } from "@/lib/tmdb";
 
 const PAGE_SIZE = 24;
 
@@ -15,6 +15,7 @@ type MovieRow = {
   runtime: number | null;
   overview: string;
   poster_path: string | null;
+  stills_json: string;
   director: string;
   cast_json: string;
   rating: number | null;
@@ -55,6 +56,7 @@ function toMovie(row: MovieRow, genres: GenreRow[] = []): Movie {
     runtime: row.runtime,
     overview: row.overview,
     posterPath: row.poster_path,
+    stills: jsonArray(row.stills_json),
     director: row.director,
     cast: jsonArray(row.cast_json),
     genres: genres.map((genre) => ({ id: genre.tmdb_genre_id, name: genre.name })),
@@ -149,15 +151,20 @@ export async function getAdminMovie(id: number) {
 }
 
 export async function createMovieFromSnapshot(snapshot: TmdbMovieSnapshot) {
-  const existing = await db().prepare("SELECT id FROM movies WHERE tmdb_id = ?").bind(snapshot.tmdbId).first<{ id: number }>();
-  if (existing) return { duplicate: true as const, id: existing.id };
+  const existing = await db().prepare("SELECT id, stills_json FROM movies WHERE tmdb_id = ?").bind(snapshot.tmdbId).first<{ id: number; stills_json: string }>();
+  if (existing) {
+    if (!jsonArray(existing.stills_json).length && snapshot.stills.length) {
+      await db().prepare("UPDATE movies SET stills_json = ? WHERE id = ? AND stills_json = '[]'").bind(JSON.stringify(snapshot.stills), existing.id).run();
+    }
+    return { duplicate: true as const, id: existing.id };
+  }
 
   const now = new Date().toISOString();
   const statements = [
     db().prepare(`INSERT INTO movies (
       tmdb_id, slug, title, original_title, release_date, countries_json, runtime, overview,
-      poster_path, director, cast_json, status, created_at, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?, ?)`)
+      poster_path, director, cast_json, stills_json, status, created_at, updated_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?, ?)`)
       .bind(
         snapshot.tmdbId,
         snapshot.slug,
@@ -170,6 +177,7 @@ export async function createMovieFromSnapshot(snapshot: TmdbMovieSnapshot) {
         snapshot.posterPath,
         snapshot.director,
         JSON.stringify(snapshot.cast),
+        JSON.stringify(snapshot.stills),
         now,
         now,
       ),
@@ -199,7 +207,9 @@ export async function updateMovie(id: number, update: MovieUpdate) {
       now,
       id,
     ).run();
-  return Number(result.meta.changes ?? 0) > 0;
+  const changed = Number(result.meta.changes ?? 0) > 0;
+  if (changed && update.status === "published") await fillMissingFilmImages(id);
+  return changed;
 }
 
 export async function deleteMovie(id: number) {
@@ -208,4 +218,15 @@ export async function deleteMovie(id: number) {
     db().prepare("DELETE FROM movies WHERE id = ?").bind(id),
   ]);
   return Number(results[1]?.meta.changes ?? 0) > 0;
+}
+
+async function fillMissingFilmImages(id: number) {
+  const row = await db().prepare("SELECT tmdb_id, stills_json FROM movies WHERE id = ?").bind(id).first<{ tmdb_id: number; stills_json: string }>();
+  if (!row || jsonArray(row.stills_json).length) return;
+  try {
+    const images = await getTmdbFilmImages(row.tmdb_id);
+    if (images.length) await db().prepare("UPDATE movies SET stills_json = ? WHERE id = ? AND stills_json = '[]'").bind(JSON.stringify(images), id).run();
+  } catch {
+    // Image outages must not discard a saved review. The next publication retries.
+  }
 }

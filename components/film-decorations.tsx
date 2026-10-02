@@ -1,14 +1,16 @@
+import { FilmFrame } from "@/components/film-frame";
 import frames from "@/data/archive/stills.json";
 
 const archiveFrames: Record<string, { path: string; source: string; tmdbPath: string }[]> = frames;
 
-export function FilmStrip({ tmdbId, title }: { tmdbId?: number; title?: string }) {
+export function FilmStrip({ tmdbId, title, stills }: { tmdbId?: number; title?: string; stills?: string[] }) {
   const images = tmdbId ? archiveFrames[String(tmdbId)] ?? [] : [archiveFrames["157336"]?.[0], archiveFrames["1949"]?.[0], archiveFrames["489999"]?.[0]].filter(Boolean);
-  if (!images.length) return null;
+  const paths = stills?.length ? stills.slice(0, 3) : images.map(image => image.path);
+  if (!tmdbId && !paths.length) return null;
   return (
     <figure className="film-strip-figure">
       <div className="film-strip">
-        {images.map((image, index) => <div className="film-strip-frame" key={image.path}><img src={image.path} alt={title ? `${title} · 电影画面 / Film frame ${index + 1}` : "电影画面 / Film frame"} loading="lazy" width={780} height={439} /><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span></div>)}
+        {Array.from({ length: 3 }, (_, index) => <div className="film-strip-frame" key={index}><FilmFrame key={paths[index] ?? index} src={paths[index]} alt={title ? `${title} · 电影画面 / Film frame ${index + 1}` : "电影画面 / Film frame"} /><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span></div>)}
       </div>
       <figcaption><span>画面拾遗 / Frames that stay</span><span>TMDB · 35mm inspired</span></figcaption>
     </figure>
