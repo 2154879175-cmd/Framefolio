@@ -1,0 +1,1 @@
+UPDATE movies SET stills_json = '["https://image.tmdb.org/t/p/w780/pNjh59JSxChQktamG3LMp9ZoQzp.jpg","https://image.tmdb.org/t/p/w780/zfbjgQE1uSd9wiPTX4VzsLi0rGG.jpg","https://image.tmdb.org/t/p/w780/kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg"]' WHERE tmdb_id = 278 AND stills_json = '[]';
