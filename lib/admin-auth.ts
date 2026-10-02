@@ -1,6 +1,6 @@
 import { env } from "cloudflare:workers";
 import { redirect } from "next/navigation";
-import { getChatGPTUser, requireChatGPTUser } from "@/app/chatgpt-auth";
+import { getChatGPTUser, requireChatGPTUser } from "@/app/auth";
 
 function ownerEmail() {
   return (env.OWNER_EMAIL || process.env.OWNER_EMAIL || "").trim().toLowerCase();

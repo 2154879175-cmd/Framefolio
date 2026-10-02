@@ -1,0 +1,67 @@
+[
+  {
+    "movie_id": 2,
+    "tmdb_genre_id": 18,
+    "name": "剧情"
+  },
+  {
+    "movie_id": 2,
+    "tmdb_genre_id": 10749,
+    "name": "爱情"
+  },
+  {
+    "movie_id": 3,
+    "tmdb_genre_id": 12,
+    "name": "冒险"
+  },
+  {
+    "movie_id": 3,
+    "tmdb_genre_id": 18,
+    "name": "剧情"
+  },
+  {
+    "movie_id": 3,
+    "tmdb_genre_id": 878,
+    "name": "科幻"
+  },
+  {
+    "movie_id": 4,
+    "tmdb_genre_id": 18,
+    "name": "剧情"
+  },
+  {
+    "movie_id": 4,
+    "tmdb_genre_id": 53,
+    "name": "惊悚"
+  },
+  {
+    "movie_id": 4,
+    "tmdb_genre_id": 80,
+    "name": "犯罪"
+  },
+  {
+    "movie_id": 5,
+    "tmdb_genre_id": 12,
+    "name": "冒险"
+  },
+  {
+    "movie_id": 5,
+    "tmdb_genre_id": 14,
+    "name": "奇幻"
+  },
+  {
+    "movie_id": 5,
+    "tmdb_genre_id": 28,
+    "name": "动作"
+  },
+  {
+    "movie_id": 6,
+    "tmdb_genre_id": 53,
+    "name": "惊悚"
+  },
+  {
+    "movie_id": 6,
+    "tmdb_genre_id": 9648,
+    "name": "悬疑"
+  }
+]

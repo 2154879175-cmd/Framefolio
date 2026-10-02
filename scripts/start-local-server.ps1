@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $projectDirectory = Split-Path -Parent $PSScriptRoot
-$nodeExecutable = Join-Path $env:USERPROFILE ".cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe"
+$nodeExecutable = (Get-Command node -ErrorAction Stop).Source
 $runtimeDirectory = Join-Path $projectDirectory ".sites-runtime"
 $logFile = Join-Path $runtimeDirectory "automatic-server.log"
 
